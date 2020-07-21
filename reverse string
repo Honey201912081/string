@@ -1,0 +1,59 @@
+string reverse(string s)
+{
+ string r;
+ int l=s.length();
+ for(int i=0;i<l;i++)
+   {
+    r=s[i]+r;
+   }
+   
+  return r; 
+}
+
+int main()
+{
+int t;
+cin>>t;
+string res[2000];
+for(int x=0;x<t;x++)
+  {
+  string s;
+  string mat[2000];
+  cin>>s;
+  int k=0;string ts="";
+  int l=s.length();
+  for(int i=0;i<l;i++)
+   {
+   
+    if(s[i]=='.')
+     {
+      mat[k++]=ts;
+      ts="";
+     }
+     else
+     if(i==l-1)
+     {
+      mat[k++]=ts+s[l-1];
+      ts="";
+     }
+     else
+     {
+     ts=ts+s[i];
+     }
+   
+   }//i
+  
+   for(int i=0;i<k;i++)
+    {
+	//cout<<mat[i]<<" ";
+	if(i!=k-1)
+    res[x]=res[x]+reverse(mat[i])+".";
+    else
+     res[x]=res[x]+reverse(mat[i]);
+    
+     
+    }
+  }//x
+ for(int i=0;i<t;i++)
+  cout<<res[i]<<endl;
+}
