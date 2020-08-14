@@ -1,0 +1,50 @@
+/*
+
+	1abc23=24
+	1abc2x30yz67=100
+*/
+
+#include <iostream>
+#include<algorithm>
+#include<string>
+#include<string.h>
+using namespace std;
+
+int getsum(string str)
+{
+    int l=str.length();
+    int c=0,j;
+    for(int i=0;i<l;)
+    {
+        if(isdigit(str[i]))
+        {
+            j=(str[i]-'0');
+            i++;
+            while(isdigit(str[i]))
+            {
+                j=j*10+(str[i]-'0');
+                ++i;
+                if(i==l)
+                    break;
+            }
+            c=c+j;
+            i++;
+        }
+        else{
+            i++;
+        }
+    }
+    return c;
+}
+int main() {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    string str;
+	   // getline(cin,str);
+	    cin>>str;
+	    cout<<getsum(str)<<endl;
+	}
+	return 0;
+}
