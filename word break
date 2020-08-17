@@ -1,0 +1,55 @@
+i like ice cream sam sung samsung
+ilike
+o/p: 1
+
+
+
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+vector<string> vstr;
+bool dictionary(string str)
+{
+     if(find(vstr.begin(),vstr.end(),str)!=vstr.end())
+        return true;
+     else
+        return false;
+}
+bool wordbreak(string str)
+{
+    int len=str.size();
+    if(len==0)
+    {
+        return true;
+    }
+    for(int i=1;i<=len;i++)
+    {
+        if(dictionary(str.substr(0,i)) && wordbreak(str.substr(i,len-i)))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+int main()
+{
+    int t,arrsize;
+    string str,qstr;
+    
+    cin>>t;
+    while(t--)
+    {
+        cin>>arrsize;
+        for(int i=0;i<arrsize;i++)
+        {
+            cin>>str;
+            vstr.push_back(str);
+        }
+        cin>>qstr;
+        wordbreak(qstr)?cout<<"1":cout<<"0";
+        cout<<endl;
+        
+    }
+    return 0;
+}
