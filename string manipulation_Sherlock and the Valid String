@@ -1,0 +1,91 @@
+/*
+link:https://www.hackerrank.com/challenges/sherlock-and-valid-string/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=strings
+
+
+Sample Input 0:aabbcd
+Sample Output 0:NO
+
+Sample Input 1:aabbccddeefghi
+Sample Output 1:NO
+Frequency counts for the letters are as follows:
+
+{'a': 2, 'b': 2, 'c': 2, 'd': 2, 'e': 2, 'f': 1, 'g': 1, 'h': 1, 'i': 1}
+
+Sample Input 2
+
+abcdefghhgfedecba
+Sample Output 2
+
+YES
+Explanation 2
+
+All characters occur twice except for e which occurs 3 times. We can delete one instance of e to have a valid string.
+*/
+string isValid(string s) {
+    long n=s.length();
+    long arr[26]={0};
+    long max=0;
+    long min=10000;
+    string str;
+    for(long i=0;i<n;i++)
+    {
+        int x=(int)s[i]-97;
+        arr[x]=arr[x]+1;
+       
+    }
+    for(long i=0;i<26;i++)
+    {
+        //int x=(int)s[i]-97;
+        if(max<arr[i])
+            max=arr[i];
+        if(min>arr[i] && arr[i]!=0)
+            min=arr[i];
+    }
+    for(long i=0;i<26;i++) //if there are more than 1 frequency ancounter than return no
+    {
+        if(arr[i]!=0)
+        {
+            if(arr[i]==max || arr[i]==min)
+                continue;
+            else
+            {
+                str="NO";
+                return str;
+            }
+        }
+    }
+    if(max==min)
+    {
+        str="YES";
+    }    
+    else
+    {
+        long max_f=0;
+        long min_f=0;
+        for(long i=0;i<26;i++)
+        {
+           // int x=(int)s[i]-97;
+            if(max==arr[i])
+                max_f++;
+            if(min==arr[i])
+                min_f++;
+        }
+        if(max-min!=1)
+        {
+            if(min==1 && min_f==1)//aabbc
+                str="YES";
+            else
+                str="NO";
+        }
+        else{
+            if(min_f==1 || max_f==1) // uncommon freequency is only occure 1 time
+            {
+                str="YES";
+            }
+            else
+                str="NO";
+        }
+        
+    }
+    return str;
+}
