@@ -1,0 +1,60 @@
+/*
+Sample Input 2
+
+SHINCHAN
+NOHARAAA
+Sample Output 2  : 3   ==>NHA
+
+
+Sample Input 3
+
+ABCDEF
+FBDAMN
+Sample Output 3 :2     ==>BD
+*/
+
+
+=========================	using 2d==================
+ int m=s1.length();
+    int n=s2.length();
+    int memo[m+1][n+1]={0};
+    
+    for(int i=0;i<=m;i++)
+    {
+        for(int j=0;j<=n;j++)
+        {
+            if(i==0||j==0)
+                memo[i][j]=0;
+            else if(s1[i-1] == s2[j-1])
+                memo[i][j]=memo[i-1][j-1]+1;
+            else
+                memo[i][j]=max(memo[i-1][j],memo[i][j-1]);
+        }
+    }
+    return memo[m][n];
+
+====================   using 1d   ========================
+
+
+int commonChild(string s1, string s2) {
+    int n=s1.length();
+    int m=s2.length();
+    int memo[m+1]={0};
+    for(int i=1;i<=n;i++)
+    {
+        int prev=0;
+        for(int j=1;j<=m;j++)
+        {
+            int tmp=memo[j];
+            if(s1[i-1]==s2[j-1])
+                memo[j]=prev+1;
+            else
+                memo[j]=max(memo[j],memo[j-1]);
+            prev=tmp;
+            
+        }
+   // cout<<memo[i]<<" ";
+    }
+    return memo[m];
+
+}
