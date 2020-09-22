@@ -1,0 +1,95 @@
+/*
+Given a positive number N. The task is to round N to nearest multiple of 10. Number can be so big and can contains 1000 of digits.
+Example:
+Input:
+2
+15
+29
+996
+Output:
+10
+30
+1000
+*/
+#include <iostream>
+#include<string>
+
+using namespace std;
+
+void roundno(string str,long int n)
+{
+    if(str=="")
+        return;
+    if(str[n-1]-'0'<=5)
+    {
+        str[n-1]='0';
+        cout<<str.substr(0,n);
+    }
+    else
+    {
+        int carry=0;
+        str[n-1]='0';
+        
+        int i=n-2;
+        carry=1;
+        
+        while(i>=0 && carry==1)
+        {
+            int curdigit=str[i]-'0';
+            curdigit+=carry;
+            if(curdigit>9)
+            {
+                carry=1;
+                curdigit=0;
+            }
+            else
+            {
+                carry=0;    
+            }
+            str[i]=(char)(curdigit+'0');
+            i--;
+        }
+        if(carry==1)
+        {
+            cout<<carry;
+        }
+        cout<<str.substr(0,n);
+    }
+}
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    string str;
+	    cin>>str;
+	    long int n=str.length();
+	    roundno(str,n);
+	    cout<<endl;
+	}
+	return 0;
+}
+
+
+=========== for small No========
+
+int round(int n) 
+{ 
+    // Smaller multiple 
+    int a = (n / 10) * 10; 
+      
+    // Larger multiple 
+    int b = a + 10; 
+  
+    // Return of closest of two 
+    return (n - a > b - n)? b : a; 
+} 
+  
+// driver function 
+int main() 
+{ 
+    int n = 4722; 
+    cout << round(n) << endl; 
+    return 0; 
+} 
