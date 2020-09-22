@@ -1,0 +1,50 @@
+/*
+Example:
+Input:
+2
+1101 111
+10 01
+
+Output:
+10100
+11
+*/
+
+#include <iostream>
+#include<string>
+#include<algorithm>
+using namespace std;
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    string s1,s2;
+	    cin>>s1;
+	    cin>>s2;
+	    int l1=s1.length()-1;
+	    int l2=s2.length()-1;
+	    int c=0;
+	    int sum=0;
+	    string res="";
+	    
+	    while(l1>=0 || l2>=0 || c==1)
+	    {
+	        if(l1>=0)
+	            sum+=s1[l1--]-'0';
+	        if(l2>=0)
+	            sum+=s2[l2--]-'0';
+	            
+	        sum+=c;
+	        res+=(sum%2)+'0';
+	        c=sum/2;
+	        sum=0; 
+	    }
+        reverse(res.begin(),res.end());
+        cout<<res<<endl;
+	    
+	}
+	return 0;
+}
