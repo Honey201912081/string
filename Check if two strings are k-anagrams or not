@@ -1,0 +1,56 @@
+/*
+Example:
+Input:
+1
+fodr gork
+2
+Output:
+1
+*/
+
+bool areKAnagrams(string str1, string str2, int k)
+{
+    int a1[26]={0};
+  
+    if(str2.length()!=str1.length())
+        return 0;
+        
+    for(long int i=0;i<str1.size();i++)
+        a1[str1[i]-'a']++;
+    int count=0;
+   for (int i = 0; i < str1.length() ; i++)
+    {
+        if (a1[str2[i]-'a'] > 0)
+            a1[str2[i]-'a']--;
+        else
+            count++;
+ 
+        if (count > k)
+            return false;
+    }
+    return true;
+}
+
+================ my slution ======
+bool areKAnagrams(string str1, string str2, int k)
+{
+    int a1[26]={0};
+    int a2[26]={0};
+    if(str2.length()!=str1.length())
+        return 0;
+        
+    for(long int i=0;i<str1.size();i++)
+        a1[str1[i]-'a']++;
+    for(long int i=0;i<str2.size();i++)
+        a2[str2[i]-'a']++;
+    int count=0;
+   for (int i = 0; i <26 ; i++)
+    {
+        count+=abs(a1[i]-a2[i]);
+      
+    }
+    if(count/2<=k)
+        return true;
+    else
+        return false;
+}
