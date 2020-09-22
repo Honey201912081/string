@@ -1,0 +1,52 @@
+/*
+input:
+pwwekw
+o/p
+3
+*/
+
+#include <iostream>
+#include<string>
+#include<climits>
+#include<map>
+using namespace std;
+void distinct(string s)
+{
+    int ans=0,left=0;
+    map<char,int>m;
+    for(int i=0;i<s.size();i++)
+    {
+        if(m.find(s[i])!=m.end())
+        {
+            while(left<m[s[i]])
+            {
+                m.erase(s[left]);
+                left++;
+            }
+            m[s[i]]=i;
+            left++;
+        }
+        else
+        {
+            m[s[i]] = i;
+            int val = m.size();
+            ans = max(ans,val);
+        }
+    }
+    for(auto it=m.begin();it!=m.end();it++)
+        cout<<it->first<<" "<<it->second<<endl;
+    cout << ans;
+}
+int main()
+ {
+	int t;
+	cin >> t;
+	while(t--)
+	{
+	    string s;
+	    cin >> s;
+	    distinct(s);
+	    cout << "\n";
+	}
+	return 0;
+}
